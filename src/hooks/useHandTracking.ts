@@ -8,6 +8,8 @@ export type Point2D = {
 
 export type HandTrackingResults = Results;
 
+const mediapipeBaseUrl = `${import.meta.env.BASE_URL}mediapipe/hands/`;
+
 type UseHandTrackingOptions = {
   videoRef: RefObject<HTMLVideoElement | null>;
   active: boolean;
@@ -87,7 +89,7 @@ export default function useHandTracking({
         await video.play();
 
         const hands = new Hands({
-          locateFile: (file) => `/mediapipe/hands/${file}`,
+          locateFile: (file) => `${mediapipeBaseUrl}${file}`,
         });
 
         hands.setOptions({
