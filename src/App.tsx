@@ -17,6 +17,7 @@ export default function App() {
         brushColor={brushColor}
         strokeWidth={strokeWidth}
         clearSignal={clearSignal}
+        onStartCamera={() => setCameraActive(true)}
       />
 
       <Toolbar

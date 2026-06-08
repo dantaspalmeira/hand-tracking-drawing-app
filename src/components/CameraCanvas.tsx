@@ -9,6 +9,7 @@ type CameraCanvasProps = {
   brushColor: string;
   strokeWidth: number;
   clearSignal: number;
+  onStartCamera: () => void;
 };
 
 const INDEX_FINGER_TIP = 8;
@@ -19,6 +20,7 @@ export default function CameraCanvas({
   brushColor,
   strokeWidth,
   clearSignal,
+  onStartCamera,
 }: CameraCanvasProps) {
   const stageRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -221,7 +223,7 @@ export default function CameraCanvas({
       </div>
 
       {(loading || error || !cameraActive) && (
-        <div className="camera-message">
+        <div className="camera-message" role="status" aria-live="polite">
           <strong>{error ? "Camera unavailable" : cameraActive ? "Starting camera" : "Camera ready"}</strong>
           <span>
             {error ||
@@ -229,6 +231,11 @@ export default function CameraCanvas({
                 ? "Allow camera permission to start hand tracking."
                 : "Click Start Camera and allow browser permission to begin tracking.")}
           </span>
+          {(!cameraActive || error) && (
+            <button className="message-action" type="button" onClick={onStartCamera}>
+              {error ? "Try Again" : "Start Camera"}
+            </button>
+          )}
         </div>
       )}
     </section>

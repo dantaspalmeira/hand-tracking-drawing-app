@@ -28,7 +28,12 @@ export default function Toolbar({
         {isDrawingMode ? "Drawing Mode" : "Move Mode"}
       </div>
 
-      <button className="tool-button primary" type="button" onClick={onToggleMode}>
+      <button
+        aria-pressed={!isDrawingMode}
+        className="tool-button primary"
+        type="button"
+        onClick={onToggleMode}
+      >
         {isDrawingMode ? "Move Mode" : "Drawing Mode"}
       </button>
 
@@ -58,7 +63,12 @@ export default function Toolbar({
         />
       </label>
 
-      <button className="tool-button danger" type="button" onClick={onToggleCamera}>
+      <button
+        aria-pressed={cameraActive}
+        className="tool-button danger"
+        type="button"
+        onClick={onToggleCamera}
+      >
         {cameraActive ? "Stop Camera" : "Start Camera"}
       </button>
     </section>
